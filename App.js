@@ -1,13 +1,20 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import Home from './App/Screens/Home';
+import { NavigationContainer } from '@react-navigation/native';
+import HomeNavigator from './App/Navigations/HomeNavigator';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Home/>
+    <SafeAreaView style={styles.container}>
       
-    </View>
+{/* //adding NavigationContainer */}
+      <NavigationContainer>
+        <HomeNavigator/>
+      </NavigationContainer>
+{/* <Home/> */}
+    </SafeAreaView>
   );
 }
 

@@ -23,7 +23,7 @@ const getTopHeadlines=async()=>{
     setNewsList(result.articles)
 }
   return (
-    <ScrollView >
+    <ScrollView style={{backgroundColor:Colors.WHITE}} >
 
         <View style={{display:'flex', flexDirection:'row' , justifyContent:'space-between', alignItems:'center'}}>
         <Text style={styles.title} >Vedant Kadam News</Text>
