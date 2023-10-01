@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ScrollView } from 'react-native'
+import { View, Text, StyleSheet, ScrollView, ActivityIndicator } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import CategoryTextSlider from '../Components/Home/CategoryTextSlider'
 import Colors from '../Shared/Colors';
@@ -10,19 +10,25 @@ import GlobalApi from '../Services/GlobalApi';
 export default function Home() {
 
   const[newsList,setNewsList]=useState([]);
+  const[loading,setLoading]=useState(true);
 
  useEffect(() => {
-    getTopHeadlines();
+    // getTopHeadlines();
+
+    getByCategory('latest');
 
  },[])
     
-const getTopHeadlines=async()=>{
+const getByCategory=async(category)=>{
+    setLoading(true);
 
-    const result=(await GlobalApi.getTopHeadlines).data;
+    const result=(await GlobalApi.getByCategory(category)).data;
     console.log(result);
     setNewsList(result.articles)
+    setLoading(false);
 }
   return (
+    
     <ScrollView style={{backgroundColor:Colors.WHITE}} >
 
         <View style={{display:'flex', flexDirection:'row' , justifyContent:'space-between', alignItems:'center'}}>
@@ -30,12 +36,16 @@ const getTopHeadlines=async()=>{
         <FontAwesome5 name="bell" size={24} color="black" />
         </View>
         
-        <CategoryTextSlider/>
+        <CategoryTextSlider selectCategory={(category)=>getByCategory(category)}/>
+        {loading?<ActivityIndicator size={'large'} color={Colors.BLUE}/>:
+<View>
         {/* //TopHeadlineSlider */}
         <TopHeadlineSlider newsList={newsList}/>
         <HeadlineList newsList={newsList}/>
-     
+        </View>
+  }
     </ScrollView>
+    
   )
 }
 

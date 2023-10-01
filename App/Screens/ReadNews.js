@@ -12,6 +12,7 @@ import { Feather } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import Colors from "../Shared/Colors";
 import * as WebBrowser from "expo-web-browser";
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function ReadNews() {
   const news = useRoute().params.news;
@@ -29,7 +30,7 @@ export default function ReadNews() {
   };
 
   return (
-    <View style={{ backgroundColor: Colors.WHITE, flex: 1 }}>
+    <ScrollView style={{ backgroundColor: Colors.WHITE, flex: 1 }}>
       <View
         style={{
           marginTop: 10,
@@ -81,6 +82,6 @@ export default function ReadNews() {
          
         >Read More</Text>
       </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 }
